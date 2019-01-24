@@ -10,28 +10,38 @@
 
 			var functionInsert = function(intNumber) {
 				// insert intNumber into intArray
+				intArray.push(intNumber);
 			};
 
 			var functionDelete = function(intNumber) {
 				// remove the first occurrence of intNumber in intArray
-
+				if(intArray.indexOf(intNumber)=== -1)
+					return;
+				intArray.splice(intArray.indexOf(intNumber),1);
 				// intArray might not contain intNumber
 				// the function does not have an effect in this case
 			};
 
 			var functionLookup = function(intIndex) {
 				// return the intNumber from intArray at intIndex, deleting the obtained intNumber
-
+			
 				// intIndex might be out of bounds
 				// should this be the case, return null
 
-				return 0;
+				if (intIndex < 0 || intIndex > intArray.length)
+					return null;
+
+					intNumber = intArray[intIndex];
+
+					intArray.splice(intIndex,1);
+
+				return intNumber;
 			};
 
 			var functionValues = function() {
 				// return a string of the concatenated intNumber in intArray, separated by commas
-
-				return '';
+					
+				return intArray.join(", ");
 			};
 
 			functionInsert(1);

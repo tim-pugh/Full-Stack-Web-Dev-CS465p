@@ -10,6 +10,8 @@
 
 			var functionInsert = function(strKey, strValue) {
 				// insert the property with strKey and strValue into objectStrings
+
+				objectStrings[strKey] = strValue;
 			};
 
 			var functionDelete = function(strKey) {
@@ -27,8 +29,8 @@
 
 			var functionKeys = function() {
 				// return a string of the concatenated strKey in objectStrings, separated by commas
-
-				return '';
+				var keys = Object.keys(objectStrings);
+				return keys.join(", ");
 			};
 
 			functionInsert('hello', 'world');
