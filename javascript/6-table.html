@@ -18,7 +18,7 @@
 				var newTableBody = document.createElement('tbody');
 				
 				var output = [];
-				strInput.split("\n").forEach(function(commas){ 
+				strInput.trim().split("\n").forEach(function(commas){ 
 					var commaArray = [];
 					
 					commas.split(",").forEach(function(element){
@@ -31,6 +31,7 @@
 					var newTableRow = document.createElement('tr');
 					for (j = 0; j <  output[i].length  ; ++j) {
 						var newTableData = document.createElement('td');
+
 						newTableData.innerHTML = output[i][j];
 						newTableRow.appendChild(newTableData);
 					}
