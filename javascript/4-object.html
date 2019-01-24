@@ -16,6 +16,7 @@
 
 			var functionDelete = function(strKey) {
 				// remove the property with strKey from objectStrings
+				delete objectStrings[strKey];
 			};
 
 			var functionLookup = function(strKey) {
@@ -23,8 +24,10 @@
 
 				// objectStrings might not contain strKey
 				// should this be the case, return an empty string
-
-				return '';
+				if(objectStrings.hasOwnProperty(strKey))
+					return objectStrings[strKey];
+				
+				else{return '';}
 			};
 
 			var functionKeys = function() {
