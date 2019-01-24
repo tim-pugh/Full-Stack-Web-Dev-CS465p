@@ -27,11 +27,23 @@
 					output.push(commaArray);
 				});
 				
-				
+				for(i = 0; i < output.length; ++i){
+					var newTableRow = document.createElement('tr');
+					for (j = 0; j <  output[i].length  ; ++j) {
+						var newTableData = document.createElement('td');
+						newTableData.innerHTML = output[i][j];
+						newTableRow.appendChild(newTableData);
+					}
+					newTableBody.appendChild(newTableRow);
+				}
 
 				
 				
+				var deleteMe = document.getElementById('output');
+				while(deleteMe.firstChild)
+					deleteMe.removeChild(deleteMe.firstChild);
 
+				newTable.appendChild(newTableBody);
 				document.getElementById('output').appendChild(newTable);
 			};
 
