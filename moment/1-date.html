@@ -10,8 +10,8 @@
 		<script type="text/javascript">
 			var functionDate = function(longEpoch) {
 				// given longEpoch (an epoch time), return a string that represents the given date in the format 'YYYY.MM.DD HH:mm:ss'
-
-				return '';
+			
+				return moment(longEpoch).format('YYYY.MM.DD HH:mm:ss');
 			};
 
 			console.log(functionDate(1468791791525)); // expected: '2016.07.17 14:43:11' (assuming pacific standard time)
