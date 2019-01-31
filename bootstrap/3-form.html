@@ -1,37 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
 
-		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-		<style type="text/css">
-			body {
-				padding-top:20px;
-			}
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
-			.col-form-label {
-				font-weight:bold;
-				text-align:right;
-			}
+	<style type="text/css">
+		body {
+			padding-top: 20px;
+		}
 
-			.form-check-input {
-				margin-top:9px;
-			}
+		.col-form-label {
+			font-weight: bold;
+			text-align: right;
+		}
 
-			.form-check-label {
-				line-height:1.75;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<!-- use col-sm-2 as well as col-sm-8 in the exercises, just like in the examples in the slides. -->
-		</div>
-	</body>
+		.form-check-input {
+			margin-top: 9px;
+		}
+
+		.form-check-label {
+			line-height: 1.75;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<!-- use col-sm-2 as well as col-sm-8 in the exercises, just like in the examples in the slides. -->
+		<form>
+			<div class="form-group">
+				<label>username:</label><input type="text" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>password:</label><input type="password" class="form-control">
+			</div>
+			<button class="btn btn-primary">login</button>
+		</form>
+		<form>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label text-right">username:</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label text-right">password:</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="password">
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="offset-sm-2 col-sm-8">
+					<button class="btn btn-primary">login</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+
 </html>
