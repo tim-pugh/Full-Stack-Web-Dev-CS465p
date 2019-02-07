@@ -23,3 +23,20 @@ var http = require('http'); // do not change this line
 // [the server restarts and looses all cookies]
 
 // http://localhost:8080/servus should return 'you must be new' in plain text and set an ident cookie
+
+var server = http.createServer(function (req, res) {
+    if (req.url === '/world') {
+        res.writeHead(200, {
+            'Content-Type': 'text/plain'
+        });
+
+        
+        res.write();
+ 
+        res.end();
+
+    }
+
+});
+console.log('server listening on port 8080');
+server.listen(process.env.PORT || 8080);
