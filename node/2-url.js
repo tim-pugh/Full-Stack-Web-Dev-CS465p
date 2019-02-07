@@ -32,3 +32,60 @@ var querystring = require('querystring'); // do not change this line
 //       </table>
 //     </body>
 //   </html>
+
+var server = http.createServer(function (req, res) {
+    if (req.url === '/') {
+        res.writeHead(200, {
+            'Content-Type': 'text/plain'
+        });
+
+        res.write('you have accessed the');
+        res.end(' root');
+
+    } else if (req.url.indexOf('/test/') === 0) {
+        res.writeHead(200, {
+            'Content-Type': 'text/plain'
+        });
+
+        console.log(req.url); // prints the full url
+
+        res.end('you have accessed "' + decodeURIComponent(req.url.substr(6)) + '" within test');
+
+    } else if ((req.url.indexOf('/attributes?'))== 0){
+
+        res.writeHead(200, {
+            'Content-Type': 'text/html'
+        });
+
+        res.write('<table border=\"1\"><tbody>');
+        var temp = querystring.parse(decodeURIComponent(req.url.substr(12)));
+        var temp2 = '<tr><td>';
+        var temp3 = '</td><td>';
+        var temp4 = '</td></tr>';
+        //var temp5 = '<tr><td></td><td></td></tr>';
+        var temp6 = '';
+        for (var prop in temp)
+            temp6 +=temp2 + prop + temp3 + temp[prop] + temp4;
+
+
+
+
+        res.write(temp6);
+        res.end('</tbody></table>');
+    }else if ((req.url.indexOf('/attributes'))== 0){
+
+        res.writeHead(200, {
+            'Content-Type': 'text/html'
+        });
+
+        res.write('<table border=\"1\"></table>');
+        res.end();
+    }
+    else{
+        res.end();
+    }
+
+
+});
+console.log('server listening on port 8080');
+server.listen(process.env.PORT || 8080);
