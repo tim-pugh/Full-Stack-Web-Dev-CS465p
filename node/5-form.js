@@ -34,3 +34,52 @@ var querystring = require('querystring'); // do not change this line
 // [the server restarts and looses all messages]
 
 // http://localhost:8080/list should return '' in plain text
+
+var server = http.createServer(function (req, res) {
+
+    var msg = '';
+    var post = '';
+
+
+    if (req.url === '/form') {
+        res.writeHead(200, {
+            'Content-Type': 'text/html'
+        });
+
+        
+        res.write("<form action=\"/new\" method=\"post\"><input type=\"text\" name=\"name\"><input type=\"text\" name=\"message\"><input type=\"submit\" value=\"submit\"></form>");
+ 
+        res.end();
+
+    }
+
+    else if (req.url === '/list') {
+        res.writeHead(200, {
+            'Content-Type': 'text/plain'
+        });
+
+        
+        res.write("");
+ 
+        res.end();
+
+    }
+
+    else if (req.url === '/new') {
+        res.writeHead(200, {
+            'Content-Type': 'text/plain'
+        });
+        
+        
+        
+        res.write("thank you for your message");
+ 
+        res.end();
+
+    }
+
+    
+
+});
+console.log('server listening on port 8080');
+server.listen(process.env.PORT || 8080);

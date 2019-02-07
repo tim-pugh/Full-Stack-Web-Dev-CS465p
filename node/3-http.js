@@ -13,6 +13,8 @@ var http = require('http'); // do not change this line
 // http://localhost:8080/check should return 'yes' / 'no' in plain text depending on whether the browser has the 'hello' cookie
 
 var server = http.createServer(function (req, res) {
+
+    var count = 0;
     if (req.url === '/') {
         res.writeHead(200, {
             'Content-Type': 'text/plain'
@@ -50,11 +52,14 @@ var server = http.createServer(function (req, res) {
         res.end();
 
     } else if (req.url === '/check') {
+        count +=1;
         res.writeHead(200, {
             'Content-Type': 'text/plain'
         });
         var cookie = req.headers.cookie;
-        if (cookie) {
+        
+
+        if (cookie && count <=2) {
             res.write('yes');
         } else {
             res.write('no');
