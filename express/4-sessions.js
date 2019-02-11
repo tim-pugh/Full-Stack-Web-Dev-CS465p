@@ -29,26 +29,34 @@ var session = require('express-session'); // do not change this line
 
 var app = express();
 var port = process.env.PORT || 8080
-var session = require('express-session');
+
 
 app.use(session({
     'store': new session.MemoryStore(),
     secret: 'super-duper',
-    resave: false,
-    saveUninitialized: false,
-    'cookie': { 'maxAge': 86400000 }
-  }));
+    resave: true,
+    saveUninitialized: true,
+    'cookie': {
+        'maxAge': 86400000
+    }
+}));
 
-  app.get('/:parameter', function(req, res) {
-    res.status(200);
-    res.set({ 'Content-Type': 'text/plain' });
+app.get('/:parameter', function(req, res) {
+
     if (req.session.example === undefined) {
+        res.status(200);
+        res.set({ 'Content-Type': 'text/plain'});
         req.session.example = [];
-        req.session.example.push(req.params.parameters);
+        req.session.example.push(decodeURIComponent(req.url));
         res.send('you must be new');
     } else {
-        req.session.example.push(req.params.parameters);
-        res.send(req.session.example.join(','));
+        res.status(200);
+        res.set({ 'Content-Type': 'text/plain'});
+
+        var test = req.session.example.slice();
+        req.session.example.push(decodeURIComponent(req.url));
+        res.send('your history:\n  ' + test.join('\n  '));
+        
     }
 });
 
