@@ -18,10 +18,23 @@ var app = express();
 var port = process.env.PORT || 8080;
 
 
+passport.use(new strategy.BasicStrategy({ qop: 'auth' },
+  function(username, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) { return done(null, false); }
+      return done(null, user, user.password);
+    });
+  },
+  function(params, done) {
+    // validate nonces as necessary
+    done(null, true);
+  }
+));
 
 
 
-app.get('/hello',
+app.get('/',passport.authenticate('basic', { session: false }),
     function (req, res) {
 
         res.status(200);
