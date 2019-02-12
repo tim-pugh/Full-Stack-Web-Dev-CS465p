@@ -38,3 +38,58 @@ var parser = require('body-parser'); // do not change this line
 // [the server restarts and looses all messages]
 
 // http://localhost:8080/list should return '' in plain text
+
+var app = express();
+var port = process.env.PORT || 8080
+
+var name = '';
+var msg = '';
+var combined = '';
+var temp = [];
+
+app.use(parser.urlencoded({
+    'extended': false,
+    'limit': 1024
+}));
+
+app.post('/new', function (req, res) {
+    res.status(200);
+    res.set({
+        'Content-Type': 'text/plain'
+    });
+    name = req.body.name;
+    msg = req.body.message;
+    combined = name + ': ' + msg;
+    temp.push(combined);
+
+    res.send('thank you for your message');
+});
+
+app.get('/form', function (req, res) {
+
+
+
+    res.status(200);
+    res.set({
+        'Content-Type': 'text/html'
+    });
+    res.send('<form action=\"/new\" method=\"post\"><input type=\"text\" name=\"name\"><input type=\"text\" name=\"message\"><input type=\"submit\" value=\"submit\"></form>');
+
+});
+
+app.get('/list', function (req, res) {
+
+
+
+    res.status(200);
+    res.set({
+        'Content-Type': 'text/plain'
+    });
+    if (combined) {
+        res.send(temp.join('\n'));
+    } else {
+        res.send();
+    }
+});
+
+app.listen(port);
