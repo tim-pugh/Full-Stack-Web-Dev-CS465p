@@ -16,6 +16,31 @@
 			// when somebody enters 'b' into the input textbox, the script should make a get request to: http://mercury.cs.pdx.edu/playground/ajax/suggest.json?strFile=b
 			// the data that is being received by this query is in the json format and might look like: { 'strFiles':['bash','bunzip2','busybox'] }
 			// this received data should subsequently set as the content of the output element as follows: 'bash\nbunzip2\nbusybox'
+		
+			$('#input').change(function(){
+			$.ajax({
+				'type':'GET',
+				'url':'http://mercury.cs.pdx.edu/playground/ajax/suggest.json?strFile=' +$('#input').val(),
+				'success':function(strData){
+					//var strJson = JSON.stringify(strData);
+    				//JSON.stringify(strData);
+					//console.log(strJson);
+					
+					//var temp = $.parseJSON(strData);
+					var temp = '';
+					for(var i = 0; i <strData.strFiles.length; ++i)
+					{	if(i !== strData.strFiles.length - 1){
+						temp += strData.strFiles[i] +'\n';
+					}
+					else{
+						temp += strData.strFiles[i];
+					}
+					}
+					$('#output').text(temp);
+				}
+			});
+		});
+		
 		</script>
 	</body>
 </html>
