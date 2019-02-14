@@ -46,6 +46,21 @@
 			// when somebody selects an option in the choice selection element, the script should make a get request to: http://mercury.cs.pdx.edu/playground/ajax/lookup.json?strName=max
 			// the data that is being received by this query is in the json format and might look like: { 'strFirst':'max','strLast':'baum','strGender':'male','strRandom':'3BLJEkKk' }
 			// this received data should subsequently be used to set the first textbox, the last textbox, the gender radio button as well as the random textbox
+
+			$('#choice').change(function(){
+			$.ajax({
+				'type':'GET',
+				'url':'http://mercury.cs.pdx.edu/playground/ajax/lookup.json?strName=' +$('#choice').val(),
+				'success':function(strData){
+
+				jQuery("#first").val(strData.strFirst);
+				jQuery("#last").val(strData.strLast);
+				jQuery('#random').val(strData.strRandom);
+				jQuery("input[name=gender][value=" + strData.strGender + "]").attr('checked', 'checked');
+				}
+			});
+		});
+
 		</script>
 	</body>
 </html>
