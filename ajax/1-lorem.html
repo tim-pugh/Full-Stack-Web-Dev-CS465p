@@ -12,7 +12,7 @@
 		<br>
 		<input id="submit" type="button" value="submit">
 		<br>
-		<pre id="output">output</pre>
+		<pre id="">output</pre>
 		
 		<script type="text/javascript">
 			// when somebody enters 'the input text' into the input textbox and clicks the submit button, the script should make a get request to: http://mercury.cs.pdx.edu/playground/ajax/lorem.txt?strInput=the%20input%20text
@@ -21,7 +21,7 @@
 		$('#submit').on('click',function(event){
 			$.ajax({
 				'type':'GET',
-				'url':'/playground/ajax/lorem.txt?strInput=' +$('#input'),
+				'url':'/playground/ajax/lorem.txt?strInput=' +$('#input').val(),
 				//'url':'http://mecury.cs.pdx.edu/playground/ajax/lorem.txt?strInput=' +$('#input'),
 				'success':function(strData){
 					console.log(strData);
