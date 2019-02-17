@@ -1,22 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
 
-		<script type="text/javascript" src="http://localhost:8080/socket.io/socket.io.js"></script>
-	</head>
-	<body>
-		<pre id="output"></pre>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-		<script type="text/javascript">
-			var objectSocket = io.connect('http://localhost:8080/'); // do not change this line
+	<script type="text/javascript" src="http://localhost:8080/socket.io/socket.io.js"></script>
+</head>
 
-			// when receiving a 'message' event from the server, append the intTimestamp and the strMessage to the output element
-			// for example, it should append the following when receiving { 'intTimestamp':123, 'strMessage':'test' } in the 'message' event: '123: test\n' 
-		</script>
-	</body>
+<body>
+	<pre id="output"></pre>
+
+	<script type="text/javascript">
+		var objectSocket = io.connect('http://localhost:8080/'); // do not change this line
+
+		// when receiving a 'message' event from the server, append the intTimestamp and the strMessage to the output element
+		// for example, it should append the following when receiving { 'intTimestamp':123, 'strMessage':'test' } in the 'message' event: '123: test\n' 
+		var prev = '';
+		objectSocket.on('message', function (objectData) {
+			console.log(objectData);
+
+			var intTimestamp = objectData.intTimestamp;
+			var strMessage = objectData.strMessage;
+
+			var send = prev + intTimestamp + ': ' + strMessage + '\n'; 
+			prev = send;
+			jQuery("#output").text(send);
+
+
+		});
+	</script>
+</body>
+
 </html>
