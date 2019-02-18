@@ -13,15 +13,38 @@ var io = socket(server.listen(process.env.PORT || 8080)); // do not change this 
 io.on('connection', function(objectSocket) {
 	// send everyone the 'clients' event, containing an array with the ids of the connected clients - example: { 'strClients':['GxwYr9Uz...','9T1P4pUQ...'] }
 	// send everyone the 'message' event, containing a message that a new client connected - example: { 'strFrom':'server', 'strTo':'everyone', 'strMessage':'9T1P4pUQ... connected' }
+	console.log('client with id ' + objectSocket.id + ' connected');
+	var id = objectSocket.id;
+	io.emit('message', {
+		'strFrom':'server',
+		'strTo': 'everyone',
+		'message': id
+	  });
+
+	  io.emit('clients', {
+		'strClients':[objectSocket.id]
+	  });
+
 
 	objectSocket.on('message', function(objectData) {
 		// if the message should be received by everyone, broadcast it accordingly
 		// if the message has a single target, send it to this target as well as to the origin
+		io.emit('message', {
+			'name': objectData.name,
+			'message': objectData.message
+		  });
+
 	});
 
 	objectSocket.on('disconnect', function() {
 		// send everyone the 'clients' event, containing an array of the connected clients - example: { 'strClients':['GxwYr9Uz...'] }
 		// send everyone the 'message' event, containing a message that an existing client disconnected - example: { 'strFrom':'server', 'strTo':'everyone', 'strMessage':'9T1P4pUQ... disconnected' }
+		console.log('client with id ' + objectSocket.id + ' disconnected');
+
+		io.emit('message', {
+			'name': 'server',
+			'message': 'user disconnected'
+		  });
 	});
 });
 
