@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<script type="text/javascript" src="http://localhost:8080/socket.io/socket.io.js"></script>
-	
+
 
 	<style type="text/css">
 		#first {
@@ -72,11 +72,11 @@
 
 		// when receiving a 'drag' event from the server, use the contained strIdent and the intLeft as well as intTop position to update the associated element
 		// for example, you might receive the following in the 'drag' event when the last div has been dragged to the left: { 'strIdent':'fourth', 'intLeft':20, 'intTop':120 }
-
+		var objectActive = null;
 		var intShiftX = 0;
 		var intShiftY = 0;
-		var objectActive = null;
-		
+		var isBeingDragged = 0;
+
 
 		objectSocket.on('drag', function (objectData) {
 
@@ -87,31 +87,36 @@
 
 		});
 
-		jQuery('.draggable')
-			.on('mousedown', function (objectEvent) {
-				
-					objectActive = this;
-					intShiftX = objectEvent.pageX - jQuery(this).offset().left;
-					intShiftY = objectEvent.pageY - jQuery(this).offset().top;
-				
-			});
 
-			jQuery(document)
+
+		jQuery(document)
 			.on('mousemove', function (objectEvent) {
-				if (objectActive !== null) {
+				if(isBeingDragged === 1){
 					jQuery(objectActive)
 						.css({
 							'position': 'absolute',
 							'left': (objectEvent.pageX - intShiftX) + 'px',
 							'top': (objectEvent.pageY - intShiftY) + 'px',
 
-							
+						
 						})
-						objectSocket.emit('drag',{id: objectActive.id, left:objectEvent.pageX - intShiftX, top:objectEvent.pageY - intShiftY })
-				}
-			})
-			.on('mouseup', function (objectEvent) {
-				objectActive = null;
+					}
+
+				
+
+			});
+
+		jQuery(document).on('mouseup', function (objectEvent) {
+			isBeingDragged = 0;
+		});
+
+		jQuery('.draggable')
+			.on('mousedown', function (objectEvent) {
+				isBeingDragged = 1;
+				objectActive = this;
+				intShiftX = objectEvent.pageX - jQuery(this).offset().left;
+				intShiftY = objectEvent.pageY - jQuery(this).offset().top;
+
 			});
 	</script>
 </body>
