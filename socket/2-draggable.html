@@ -64,7 +64,7 @@
 	<div id="fourth" class="draggable"></div>
 
 	<script type="text/javascript">
-	
+		var io = io.connect();
 		var objectSocket = io.connect('http://localhost:8080/'); // do not change this line
 
 		// when dragging an element around, send a 'drag' event to the server containing the strIdent of the element and the new intLeft as well as the new intTop position
@@ -76,7 +76,7 @@
 		var intShiftX = 0;
 		var intShiftY = 0;
 		var objectActive = null;
-		var io = io();
+		
 		var objectSocket2 = io.connect('http://localhost:8080/');
 
 		objectSocket2.on('drag', function (objectData) {
@@ -90,11 +90,10 @@
 
 		jQuery('.draggable')
 			.on('mousedown', function (objectEvent) {
-				if (objectEvent.which === 1) {
+				
 					objectActive = this;
 					intShiftX = objectEvent.pageX - jQuery(this).offset().left;
 					intShiftY = objectEvent.pageY - jQuery(this).offset().top;
-				}
 				
 			});
 
