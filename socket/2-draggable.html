@@ -77,9 +77,8 @@
 		var intShiftY = 0;
 		var objectActive = null;
 		
-		var objectSocket2 = io.connect('http://localhost:8080/');
 
-		objectSocket2.on('drag', function (objectData) {
+		objectSocket.on('drag', function (objectData) {
 
 
 			var p = $("objectData.strIdent");
@@ -108,7 +107,7 @@
 
 							
 						})
-						objectSocket2.emit('drag',{id: objectActive.id, left:objectEvent.pageX - intShiftX, top:objectEvent.pageY - intShiftY })
+						objectSocket.emit('drag',{id: objectActive.id, left:objectEvent.pageX - intShiftX, top:objectEvent.pageY - intShiftY })
 				}
 			})
 			.on('mouseup', function (objectEvent) {
