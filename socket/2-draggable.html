@@ -81,9 +81,8 @@
 		objectSocket.on('drag', function (objectData) {
 
 
-			var p = $("objectData.strIdent");
-			var offset = p.offset();
-			p.html("left: " + offset.intLeft + ", top: " + offset.intTop);
+			var p = objectData.strIdent;
+			p.html("position: "+ p.position + "left: " + p.intLeft + ", top: " + p.intTop);
 
 		});
 
@@ -101,8 +100,9 @@
 						
 						})
 					}
-
-					objectSocket.emit('drag',{strIdent:objectActive.strIdent, intLeft:objectActive.left, intTop:objectActive.top })
+					console.log(objectActive)
+					
+					objectSocket.emit('drag',{strIdent:objectActive.strIdent, intLeft: objectActive.left, intTop:objectActive.top })
 
 			});
 
