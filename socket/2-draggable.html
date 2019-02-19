@@ -55,7 +55,7 @@
 
 		objectSocket.on('drag',function(objectData){
 				objectActive = $(objectData.strIdent);
-				$(objectActive).offset({intLeft: data.intLeft, intTop: data.intTop})
+				$(objectActive).offset({intLeft: objectData.intLeft, intTop: objectData.intTop})
                 });
 
 		jQuery(document)
