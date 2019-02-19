@@ -17,11 +17,14 @@ io.on('connection', function(objectSocket) {
 
 	for (var strIdent in objectElements) {
 		io.emit('drag', objectElements[strIdent]);
+
 	}
 
 	objectSocket.on('drag', function(objectData) {
 		console.log(objectData);
-
+		console.log(objectData.strIdent);
+		console.log(objectData.intLeft);
+		console.log(objectData.intTop);
 		assert(objectData.strIdent !== undefined);
 		assert(objectData.intLeft !== undefined);
 		assert(objectData.intTop !== undefined);
