@@ -82,7 +82,7 @@
 
 
 			var p = objectData.strIdent;
-			p.html("position: "+ p.position + "left: " + p.intLeft + ", top: " + p.intTop);
+			p.html("position: " + p.position + "left: " + p.intLeft + ", top: " + p.intTop);
 
 		});
 
@@ -90,20 +90,23 @@
 
 		jQuery(document)
 			.on('mousemove', function (objectEvent) {
-				if(isBeingDragged === 1){
-					jQuery(objectActive)
-						.css({
-							'position': 'absolute',
-							'left': (objectEvent.pageX - intShiftX) + 'px',
-							'top': (objectEvent.pageY - intShiftY) + 'px',
+				if (objectActive !== null) {
+					if (isBeingDragged === 1) {
+						console.log(objectActive)
+						jQuery(objectActive)
+							.css({
+								'position': 'absolute',
+								'left': (objectEvent.pageX - intShiftX) + 'px',
+								'top': (objectEvent.pageY - intShiftY) + 'px',
 
-						
-						})
+
+							})
 					}
-					console.log(objectActive)
-					
-					objectSocket.emit('drag',{strIdent:objectActive.strIdent, intLeft: objectActive.left, intTop:objectActive.top })
 
+
+
+					objectSocket.emit('drag', { strIdent: objectActive.strIdent, intLeft: (objectEvent.pageX - intShiftX) + 'px', intTop: (objectEvent.pageY - intShiftY) + 'px' })
+				}
 			});
 
 		jQuery(document).on('mouseup', function (objectEvent) {
@@ -113,7 +116,7 @@
 		jQuery('.draggable')
 			.on('mousedown', function (objectEvent) {
 				isBeingDragged = 1;
-				objectActive = this;
+				objectActive = $(this);
 				intShiftX = objectEvent.pageX - jQuery(this).offset().left;
 				intShiftY = objectEvent.pageY - jQuery(this).offset().top;
 
